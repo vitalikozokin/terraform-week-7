@@ -15,7 +15,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rg" {
   name = "staging"
-  location = "eastus"
+  location = "ukwest"
 }
 
 module "network_details" {
@@ -45,7 +45,7 @@ module "postgres_service" {
   dns_zone_name = "postgres.service.postgres.database.azure.com"
   virtual_network_id = module.network_details.virtual_net.id
   private_subnet_id = module.network_details.private_subnet.id
-  service_name = "postgres-service"
+  service_name = "postgres-service-staging"
   username = "postgres"
   password = "P0$tgres2022"
 }
@@ -56,7 +56,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.network_interface[each.value].id]
-  size                  = "Standard_DS1_v2"
+  size                  = "Standard_B2s"
   admin_username        = "ubuntu"
   admin_password        = "B0Otc@mp13062022"
 

@@ -19,7 +19,7 @@ resource "azurerm_private_dns_zone" "postgres_dns" {
 
 
 resource "azurerm_private_dns_zone_virtual_network_link" "postgres_zone" {
-  name                  = "postgres.service.vitali"
+  name                  = "postgres.service"
   private_dns_zone_name = azurerm_private_dns_zone.postgres_dns.name
   virtual_network_id    = var.virtual_network_id
   resource_group_name   = var.resource_group_name
